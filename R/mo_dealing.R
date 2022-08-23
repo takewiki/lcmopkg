@@ -96,7 +96,7 @@ mo_combine <- function(file_name ="data-raw/原始数据.xlsx",key_word='轿顶�
   }
 
 
-  openxlsx::write.xlsx(res,'lcmo.xlsx',overwrite = T)
+  # openxlsx::write.xlsx(res,'lcmo.xlsx',overwrite = T)
   return(res)
 
 
