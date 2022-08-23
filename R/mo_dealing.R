@@ -27,8 +27,33 @@ mo_combine <- function(file_name ="data-raw/原始数据.xlsx",key_word='轿顶�
   #选择列
   data_mo <- data_mo[data_mo$flag ==TRUE ,col_name_selected]
   ncount <- nrow(data_mo)
+
+
   if (ncount >0){
     #排序
+    #针对数据进行预处理，尤其是*部分
+    data_pre <- split(data_mo,data_mo$工事番号)
+    data_pre_res = lapply(data_pre, function(data){
+      ver_no = data$图号版本号
+      ver_no_ext = ver_no[!ver_no  %in% '*']
+      if(length(ver_no_ext) >0){
+        data$图号版本号[data$图号版本号 == '*'] <-ver_no_ext[1]
+
+
+      }
+      return(data)
+
+
+
+
+    })
+
+    data_mo = do.call('rbind',data_pre_res)
+
+
+
+
+
     #增加新的类型
     data_mo$field_gp = as.character(paste0(data_mo$工事番号,data_mo$图号版本号))
     print(data_mo$field_gp)
@@ -71,7 +96,7 @@ mo_combine <- function(file_name ="data-raw/原始数据.xlsx",key_word='轿顶�
   }
 
 
-  openxlsx::write.xlsx(res,'lcmo.xlsx')
+  openxlsx::write.xlsx(res,'lcmo.xlsx',overwrite = T)
   return(res)
 
 
