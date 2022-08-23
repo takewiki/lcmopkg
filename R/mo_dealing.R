@@ -17,6 +17,7 @@ mo_combine <- function(file_name ="data-raw/原始数据.xlsx",key_word='轿顶�
                          '主订单编号',
                          '订购日期',
                          '品目',
+                         '图号版本号',
                          '图号',
                          '品名',
                          '工事番号',
@@ -28,16 +29,22 @@ mo_combine <- function(file_name ="data-raw/原始数据.xlsx",key_word='轿顶�
   ncount <- nrow(data_mo)
   if (ncount >0){
     #排序
-    data_mo <-data_mo[order(data_mo$工事番号), ]
+    #增加新的类型
+    data_mo$field_gp = as.character(paste0(data_mo$工事番号,data_mo$图号版本号))
+    print(data_mo$field_gp)
+    #定义工事番号+图号版本号作为分组依据
+    data_mo <-data_mo[order(data_mo$field_gp), ]
     #分组处理
-    data_split <- split(data_mo,data_mo$工事番号)
+    data_split <- split(data_mo,data_mo$field_gp)
     #按工事番号进行处理
+    #V2:工事番号+图号版本号进行处理
     data_res <- lapply(data_split, function(data){
       prd_month <- unique(data$`生产旬`)[1]
       mo_no <- unique(data$`主订单编号`)[1]
       pur_date <- unique(data$`订购日期`)[1]
       prd_number <- paste(unique(data$`品目`),collapse = '\n')
       chart_no_cell <-unique(data$`图号`)
+      chart_version_cell <-unique(data$`图号版本号`)
       chart_len <- nchar(chart_no_cell)
       chart_no_data <- data.frame(chart_no_cell,chart_len,stringsAsFactors = F)
       #按长度排序，然后按顺序
@@ -52,7 +59,7 @@ mo_combine <- function(file_name ="data-raw/原始数据.xlsx",key_word='轿顶�
       mo_no2 <-  unique(data$`工事番号`)[1]
       issue_date <- unique(data$`交货期`)[1]
       prd_qty <- 1
-      data_cell <- data.frame(prd_month,mo_no,pur_date,prd_number,chart_no,prd_name,mo_no2,issue_date,prd_qty,stringsAsFactors = F)
+      data_cell <- data.frame(prd_month,mo_no,pur_date,prd_number,chart_version_cell,chart_no,prd_name,mo_no2,issue_date,prd_qty,stringsAsFactors = F)
       names(data_cell) <- col_name_selected
       return(data_cell)
     })
@@ -64,7 +71,8 @@ mo_combine <- function(file_name ="data-raw/原始数据.xlsx",key_word='轿顶�
   }
 
 
+  openxlsx::write.xlsx(res,'lcmo.xlsx')
   return(res)
- # openxlsx::write.xlsx(res,'lcmo.xlsx')
+
 
 }
