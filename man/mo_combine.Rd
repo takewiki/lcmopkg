@@ -4,7 +4,7 @@
 \alias{mo_combine}
 \title{针对生产订单按工事番号进行合并}
 \usage{
-mo_combine(file_name = "data-raw/原始数据.xlsx", key_word = "轿顶站")
+mo_combine(file_name = "data-raw/原始数据v0.4.xlsx", key_word = "轿顶站")
 }
 \arguments{
 \item{file_name}{文件名}
