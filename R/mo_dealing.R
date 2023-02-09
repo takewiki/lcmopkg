@@ -82,7 +82,8 @@ mo_combine <- function(file_name ="data-raw/原始数据v0.4.xlsx",key_word='轿
       # chart_version_cell <-unique(data$`图号版本号`)
       # 取消唯一性排序
       chart_no_cell <-data$`图号`
-      chart_version_cell <-data$`图号版本号`
+      #增加版本号处理，如果版本号为NA，则替换为''
+      chart_version_cell <-tsdo::na_replace(data$`图号版本号`,'')
 
       chart_len <- nchar(chart_no_cell)
       chart_no_data <- data.frame(chart_no_cell,chart_len,stringsAsFactors = F)
