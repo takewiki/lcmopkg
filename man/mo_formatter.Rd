@@ -5,7 +5,7 @@
 \title{生产订单2023版转2022版}
 \usage{
 mo_formatter(
-  file_name = "data-raw/三菱模板2023转2022 .xlsx",
+  file_name = "data-raw/新三菱订单模板2023转2022.xlsx",
   sheet_name = "2023新模板表"
 )
 }
