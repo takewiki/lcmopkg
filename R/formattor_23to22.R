@@ -8,7 +8,7 @@
 #'
 #' @examples
 #' mo_formatter()
-mo_formatter <- function(file_name ="data-raw/三菱模板2023转2022 .xlsx",
+mo_formatter <- function(file_name ="data-raw/新三菱订单模板2023转2022.xlsx",
                          sheet_name ="2023新模板表"){
   #library(readxl)
   data <- readxl::read_excel(file_name,
@@ -17,6 +17,9 @@ mo_formatter <- function(file_name ="data-raw/三菱模板2023转2022 .xlsx",
   data$类别 = data$采购分类
   data$生产旬 <-''
   data$主订单编号 <- data$主订单号
+  data$物料号 <- data$物料号
+  data$采购单价 <-data$单价
+  data$单价区分 <- data$单价类型
   data$子订单编号 <- data$采购凭证号
   data$品目 <- data$物料组
   #针对数据进行预处理
@@ -45,6 +48,7 @@ mo_formatter <- function(file_name ="data-raw/三菱模板2023转2022 .xlsx",
                     '订购日期',
                     '品目',
                     '仓号',
+                    '物料号',
                     '图号',
                     '图号版本号',
                     '互换性',
@@ -61,6 +65,8 @@ mo_formatter <- function(file_name ="data-raw/三菱模板2023转2022 .xlsx",
                     '采购员',
                     '交货期',
                     '订购数量',
+                    '采购单价',
+                    '单价区分',
                     '客户号',
                     '客户名称',
                     '有无摘要',
