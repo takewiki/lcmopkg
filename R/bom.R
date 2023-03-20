@@ -18,7 +18,7 @@ bom_breakdown <- function(file_name="data-raw/需求说明文档LD.xlsx",sheet_d
   data2 = data[data$物料描述 == "子箱" , ]
   dataB = data[data$物料描述 != "子箱" , ]
   df1 = data2$采购凭证号
-  data3 <- read_excel(file_name,sheet =sheet_BOM)
+  data3 <- readxl::read_excel(file_name,sheet =sheet_BOM)
 
   result=lapply(df1, function(item){
     data4 = data3[data3$采购订单号 == item, ]
