@@ -1,7 +1,7 @@
 Package: lcmopkg
 Type: Package
 Title: What the Package Does (Title Case)
-Version: 0.7.0
+Version: 0.7.1
 Author: hulilei
 Maintainer: liudan <liudan@takewiki.com.cn>
 Description: More about what it does (maybe more than one line)

@@ -5,7 +5,7 @@
 \title{Title bom展开函数}
 \usage{
 bom_breakdown(
-  file_name = "data-raw/需求说明文档.xlsx",
+  file_name = "data-raw/需求说明文档LD.xlsx",
   sheet_data = "2023新模板表",
   sheet_BOM = "2023BOM表"
 )

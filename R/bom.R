@@ -11,7 +11,7 @@ library(readxl)
 #'
 #' @examples
 #' bom_breakdown()
-bom_breakdown <- function(file_name="data-raw/需求说明文档.xlsx",sheet_data="2023新模板表",sheet_BOM="2023BOM表") {
+bom_breakdown <- function(file_name="data-raw/需求说明文档LD.xlsx",sheet_data="2023新模板表",sheet_BOM="2023BOM表") {
 
 
   data <- readxl::read_excel(file_name,sheet = sheet_data)
